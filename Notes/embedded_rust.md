@@ -20,7 +20,7 @@ Source: <https://docs.rust-embedded.org/book/intro/no-std.html>
   - Peripheral Access Crate (PAC): this wrapper over memory-wrapper registers
   - HAL Crate: user-friendly API for processor, often impl embedded-hal
   - Board Crate: abstracts HW details: pre-config. peripherals, GPIO -> provided functionalities differ a lot between boards
-- concurrency, critical sesctions, atomic access
+- concurrency, critical sections, atomic access
   - `UnsafeCell`, `Send`, `Sync`, `Mutex`
   - RTIC framework: Real TIme Itnerrupt-driven Concurrency
 - Best-practices compared to C"
