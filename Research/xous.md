@@ -102,6 +102,7 @@
 - hardware entirely memory-mapped
 - utralib: map hardware target specification to set of physical memory locations used by the hardware
   -> platform-specific artifacts
+  - derived from SVD files
 - support different arch's:
   - arm, riscv, hosted
   - cfg-flag gated

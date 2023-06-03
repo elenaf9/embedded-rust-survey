@@ -23,6 +23,8 @@
   - The case for writing a Kernel in Rust: <https://dl.acm.org/doi/abs/10.1145/3124680.3124717>
   - System Programming in Rust: Beyond Safety <https://dl.acm.org/doi/pdf/10.1145/3102980.3103006>
   - Learning and programming challenges of rust: a mixed-methods study: <https://dl.acm.org/doi/10.1145/3510003.3510164>
+- Readleaf:
+  - RedLeaf: Towards An Operating System for Safe and Verified Firmware: <https://dl.acm.org/doi/pdf/10.1145/3317550.3321449>
 
 ### Rust Crates / Implementations
 
@@ -42,10 +44,6 @@ OSes:
 - Theseus OS: novel OS structure                                                            [!embedded, networking]
 - DroneOS: Embedded Operating System for writing real-time applications in Rust.            [embedded, !networking]
 
-Unikernels:
-
-- stardust-oxide [embedded, networking]
-- RustyHermit: unikernel [embedded, networking]
 
 #### Drivers / I/O
 
@@ -89,13 +87,18 @@ _Not primary resources, but potentially still relevant._
 
 OSes (that are either not for embedded, or don't include a networking stack, or both):
 
-- Tifflini (rust_os): experimental kernel [!embedded, networking]
+- Tifflin (rust_os): experimental kernel [!embedded, networking]
 - moros: requires BIOS, only x86-64 arch [!embedded, networking]
 - aero: 64 bit, higher half kernel [!embedded, networking]
 - kerla, [!embedded, networking]
 - intermezzo: for learning how to write an OS [!embedded, !networking]
 - felix: targets x86 [!embedded, !networking]
-- rcore: OS on RISCV [?embedded, networking]
+- rCore: OS on RISCV [?embedded, networking]
+- ArceOS: unikernel [?embedded, networking]
+- zCore: reimplementation of Zircon microkernel in Rust
+  - unfortunately almost all docs on this are in chinese
+- RustyHermit: x86 unikernel [embedded, networking]
+- stardust-oxide: builds on Xen Hypervisor that manages the physical ressources [!embedded, networking]
 
 Networking stacks/ utilities (all require rust std library?):
 

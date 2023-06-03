@@ -38,3 +38,4 @@ Source: <https://docs.rust-embedded.org/book/intro/no-std.html>
 
 - traits: GPIO, serial comm, I2C, SPI, timer, ADC
 - users of the HAL: HAL implementation, Driver, Application
+- used by hubris & thesus for serial wrapper
