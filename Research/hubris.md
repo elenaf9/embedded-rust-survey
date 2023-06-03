@@ -47,7 +47,37 @@
     - may reinitialize failed task
   - can't change memory protection
   - doesn't initialize/ zero data
-  
+
+#### Servers
+
+- tasks that implement some API
+
+#### Supervisor task
+
+- implemented as task, index 0, with highest priority
+- kernel recognizes supervisor task
+  - informs it if a task crashes
+  - any task can SEND to it
+  - supervisor can only SEND to kernel
+```
+     +-----------+  +-----------+  +-----------+
++----+ app task  |  | app task  |  | app task  +-----+
+|    +--+----+---+  +--+-+---+--+  +-+---------+     |
+|       |    |         | |   |       |               |
+|       |    |  +------+ |   +-+  +--+               |
+|       |    |  |        |     |  |                  |
+|       v    v  v        v     v  v                  |
+| +------+ +------+ +------+ +------+ +----------+   |
+| |server| |server| |server| |server| |supervisor|   |
+| +---+--+ +--+---+ +---+--+ +--+---+ +----+-----+   |
+|.....|.......|.........|.......|..........|.......  |
+| +---v-------v---------v-------v----------v-----+   |
+| |                                              |   |
++->+                  kernel                      +<-+
+  |                                              |
+  +----------------------------------------------+
+```
+
 ### Inter-process communication
 
 - synchronous messaging; kernel copies payload from sender to recipient -> "rendezvous"/ "handoff"
@@ -56,6 +86,7 @@
     - limits power of task: can't spam
     - receivers can coordinate when sender's (not) run -> helps mutual exklusion
 - rules around messaging & task priority to avoid deadlocks & priority inversion
+   - can only SEND to higher priority taskss
 - Sending returns response: response code & data written into the provided buffer
 - messages limited to 256 bytes
 - leases: small descriptors that tell the memory to allow receiver to access part of sender's memory
@@ -98,7 +129,45 @@ fn read(task: TaskId, fd: u32, buffer: &mut [u8]) -> Result<usize, IoError> {
   - e.g. to not block a server that needs to send data to a client
 - "pingback" pattern
 
+### Interrupts
 
+- delivered as notifications
+- task has exclusive control over any itnerrupts it handles
+- tasks can use `irq_control` syscall to (un)mask ienrrupts
+- some interrupts reserved for kernel
+
+### Syscalls
+
+- Supported:
+  - IPC pimriitves:
+    - send, receive, reply
+    - acess to memory borrowed from senders
+    - looking up the correct generation number for a task
+  - Access to multiplexed per-task timer
+  - Control of the current task's interrupt mask
+  - Crashing current task
+  -> operatiosn that every task should have access to
+- **not** supproted:
+  - checking state / fault info of a task
+  - (re)starting a task
+  - forcing faults on other tasks
+  -> done by supervisor task
+- `SEND`, `RECV`, `REPLY`, `SET_TIMER`, `BORROW_READ`, `BORROW_WRITE`, `BORROW_INFO`, `IRQ_CONTROL`, `PANIC`, `GET_TIMER`, `REFRESH_TASK_ID`, `POST`, `REPLY_FAULT
+
+### Kernel IPC Interface
+
+- `read_task_status`, `reinit_task`, `fault_task`, `read_image_id`, `reset`, `read_caboose_pos`, `get_task_dump_region`, `read_task_dump_region`
+
+### Drivers
+
+- unpriviledged; don't live in kernel
+- hardware drivers exist as "servers"
+- driver crate
+  - interface for dealing with a device
+  - may directly access hardware or do IPC calls to other server
+- driver server:
+  - wraps driver crate
+  - provides IPC interface
 
 ## Other
 
@@ -107,3 +176,4 @@ fn read(task: TaskId, fd: u32, buffer: &mut [u8]) -> Result<usize, IoError> {
 
 - Comment on Reddit about Hubris vs Tock by Bryan Cantrill (Hubris Maintainer): <https://www.reddit.com/r/rust/comments/r5l97n/comment/hmonirr/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button>
 > We spent some time with Tock; it has a very different design center: Tock uses dynamic loading extensively, where Hubris is static with respect to tasks; Tock is very asynchronous where Hubris is strictly synchronous; Tock has drivers in the same protection domain as the kernel (albeit partitioned by the system) where Hubris has drivers in disjoint projection domains. These aren't necessarily problems with one system or the other, but rather reflect their different design centers -- and thankfully, the world is big enough for many systems solving different problems! 
+
