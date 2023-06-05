@@ -39,3 +39,27 @@ Source: <https://docs.rust-embedded.org/book/intro/no-std.html>
 - traits: GPIO, serial comm, I2C, SPI, timer, ADC
 - users of the HAL: HAL implementation, Driver, Application
 - used by hubris & thesus for serial wrapper
+
+
+## Segmented Stacks
+
+_(DroneOS also uses a segmented stack -> compare?)_
+
+<https://link.springer.com/article/10.1007/BF00365393>
+
+- Problems with contiguous stacks:
+  - Inefficient if no virtual memory
+    - physical memory is statically allocated to them
+  - Without virtual memory: stack overflow difficult to detect
+    - With MPU: can be detected through MPU
+    - else: add stack probing -> hgiher overhead
+- segmented stack: stacklets that are dynamicall allocated from heap
+  - grows on demands, frees memory when offering function returns
+  - downsides: memory inefficiency; performance
+- Analysis of case study:
+  - Stack use substantial memory
+  - Maximum stack usage is significantly smaller than allocated stack size
+  - Task spend mist time blocked with min stack usage
+  - Large arrays & strcuts are commonly declared as static variables -> don't need to be static in practice
+
+

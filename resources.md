@@ -9,6 +9,7 @@
   - "Multiprogramming a 64 kB Computer Safely and Efficiently" <https://dl.acm.org/doi/pdf/10.1145/3132747.3132786>
   - "Tiered trust for useful embedded systems security" <https://dl.acm.org/doi/10.1145/3517208.3523752>
   - "Energy Harvesting Systems Need an Operating System Too": <https://dl.acm.org/doi/pdf/10.1145/3417308.3430274>
+  - The case for writing a Kernel in Rust: <https://dl.acm.org/doi/abs/10.1145/3124680.3124717>
 - Theseus OS:
   - "Theseus: an Experiment in Operating System Structure and State Management" <https://www.usenix.org/system/files/osdi20-boos.pdf>
   - "Theseus: Rethinking Operating Systems Structure and State Management" <https://dl.acm.org/doi/10.5555/AAI28735941>
@@ -16,11 +17,8 @@
   - "Exploring Rust for Unikernel Development" <https://dl.acm.org/doi/abs/10.1145/3365137.3365395>  
 - Embedded Rust:
   - Tighten Rust’s Belt: Shrinking Embedded Rust Binaries: <https://dl.acm.org/doi/pdf/10.1145/3519941.3535075>
-  - Bringing Segmented Stacks to Embedded Systems: <https://dl.acm.org/doi/10.1145/3572864.3580344>
-  - System Architecture Directions for Post-SoC/32-bit Networked Sensors: <https://dl.acm.org/doi/pdf/10.1145/3274783.3274839>
   - On Utilizing Rust Programming Language for Internet of Things: <https://ieeexplore.ieee.org/abstract/document/8319363o>
   - Towards Rust for Critical Systems: <https://ieeexplore.ieee.org/abstract/document/8990314>
-  - The case for writing a Kernel in Rust: <https://dl.acm.org/doi/abs/10.1145/3124680.3124717>
   - System Programming in Rust: Beyond Safety <https://dl.acm.org/doi/pdf/10.1145/3102980.3103006>
   - Learning and programming challenges of rust: a mixed-methods study: <https://dl.acm.org/doi/10.1145/3510003.3510164>
 - Readleaf:
