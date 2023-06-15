@@ -97,6 +97,11 @@ OSes (that are either not for embedded, or don't include a networking stack, or 
   - unfortunately almost all docs on this are in chinese
 - RustyHermit: x86 unikernel [embedded, networking]
 - stardust-oxide: builds on Xen Hypervisor that manages the physical ressources [!embedded, networking]
+- axle OS: message-passing micro-kernel; x86 [!embedded, networking]
+  - https://www.youtube.com/watch?v=OAGuoKa1Gm8
+- pluggable interrupt OS; x86
+  - https://www.youtube.com/watch?v=koYSvETs03o
+- RedLeaf: x86
 
 Networking stacks/ utilities (all require rust std library?):
 
