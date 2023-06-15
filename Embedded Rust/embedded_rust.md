@@ -63,3 +63,22 @@ _(DroneOS also uses a segmented stack -> compare?)_
   - Large arrays & strcuts are commonly declared as static variables -> don't need to be static in practice
 
 
+## An overview of the embedded rust ecosystem
+
+<https://www.youtube.com/watch?v=vLYit_HHPaY>
+
+- micro controllers control I/O through registers: typically memory mapped
+- svd files: 
+  - published my microcontroller manufacturers
+  - describe function of each register
+  - use svd2rust to generate rust crate
+- PAC crates: some patches, then svd2rust
+  - mostly safe interface, abstraction
+  - no check for dependencies between peripheries
+  - no initialisation
+- HAL: high level interface around PAC
+  - higher abstraction than a HAL in C
+  - setup common structs (e.g. RCC to manange system and peripheral clocks), aquire and configure peripheral (which take the common struct as input to guarentee that is was set up)
+  -> guided by type system (e.g. via Builder pattern)
+- embedded HAL: traits for common peripherals
+- Board support crates: utilities for breakout boards

@@ -41,6 +41,18 @@ Problem:
     - Fair: a task can’t monopolize CPU time even if it’s constantly being woken. All other tasks get a chance to run before a given task gets polled for the second time.
     - Creating multiple executor instances is supported, to run tasks with multiple priority levels. This allows higher-priority tasks to preempt lower-priority tasks.
 
+
+### Implementation
+
+<https://github.com/embassy-rs/embassy/blob/main/embassy-executor>
+
+- Executor builds upon arch-specific executor implementation
+- Executor implemented as state machine:
+  - polls all tasks in runqueue
+  - task only in runqueue if waker was called for it
+- quite a lot of unsafe code
+
+
 ## Embassy HAL
 
 - Embassy projects maintains HALs for selected hardware

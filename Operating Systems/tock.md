@@ -56,7 +56,7 @@ source: https://www.tockos.org/assets/papers/tock-sosp2017.pdf
   - cannot subvert Rust type system
   - can only access ressources explicitly granted to it; only what is permitted through their interface
   - e.g. drivers, multiplexing hardware, sys-call capsules
-- Trusted Capsules: 
+- Truss ted Capsules: 
   - small number of capsules that interact directly with hardware
   - low-level abstractsion of MCU peripherals (cast memory ampped regs to type-safe structs)
   - core kernel capsules (e.g. process scheduler, that manipualtes CPU registers)
@@ -174,4 +174,36 @@ Hardware Interface Layers:
 - All I/O-Operations in Tock are non-blocking
   - Writing drivers is more complicated
     -> favor kernel safety over driver simplicity
+
+## HAL
+
+kernel crates:
+- kernel/: kernel oeprations & library; Hardware Interface Layer (HIL) definitions
+- arch/ folder: Architecture crate; currently support ARM Cortex-M0, Cortex-M3, and Cortex M4, and the riscv32imac architectures; porting to another ARM Cortex M should be easy, for other architectures more work. 
+  - Syscall entry/exit
+  - Interrupt configuration
+  - Top-half interrupt handlers
+  - MPU configuration (if appropriate)
+  - Power management configuration (if appropriate)
+- chips/ Chip-specific crate:  handle interrupts, implements hardware abstraction layer for chip's perihperals; implement HIL defined by kernel
+  - separate crate for shared code between same family of microcontrollers
+  - use svd for setting up register mapping for invidual peripherals
+- capsules/ hardware independent drivers & visualization layers
+- boards/ platofrm specific crate: configure kernel; configure chip & peripherals, assigns peripherals to drivers, sets up virtualization layers, defines system call itnerface
+  - leverage "components" for capsules: structs that inlcude all setup code for a driver; only require board-specific options to be passed -> alternative to verbose driver instantiation
+
+### Binary format:
+
+- Tock loads application separately form kernel
+-`.apps section`: placeholder in kernel; at physical address where the applications will be loaded
+  - applications must follow Tock Binary Format
+
+
+## Porting Tock to a new Platform
+
+- Platform requirements: 
+  - memory protection Unit
+  - 32-bit (with hacks also on 64-bit)
+  - at least 64kB RAM, 128kB flash 
+  - one single core (multicore is okay, but only one used by tock)
 
