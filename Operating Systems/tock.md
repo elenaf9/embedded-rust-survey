@@ -207,3 +207,9 @@ kernel crates:
   - at least 64kB RAM, 128kB flash 
   - one single core (multicore is okay, but only one used by tock)
 
+
+## Networking Stack
+
+- <https://github.com/tock/tock/blob/3c29752fb9db8288eebd5eaa302692e0ee4de0b8/doc/Networking_Stack.md>
+- Networking implemented as a capsule, no usage of smoltcp   
+

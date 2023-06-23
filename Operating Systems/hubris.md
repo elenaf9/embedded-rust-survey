@@ -343,3 +343,38 @@ From FAQ: <https://github.com/oxidecomputer/hubris/blob/6c0c483c47f5050696032b71
 - Debugger developed alongside with Hubris
 - "Application Debugger Co-Design"
 
+## Networking stack
+
+### task::net for STM32H7
+
+- Use smoltcp for Network IPC server implementation
+- only UDP
+- `smol::phy::Device` implementations:
+  - `VLanEthernet` & `Smol`:
+    - Wrapper around stm32h7 ethernet driver
+- The task's main loop continously polls the server, which wraps the Devices, and smoltcp sockets and interface and polls said interface
+  - leverage socket waker API: iterate through sockets, if pending incoming or outgoing packet notify ethernet driver 
+
+Sending a packet:
+
+```mermaid
+sequenceDiagram
+  participant task::Client as C
+  participant task::Server as Svr
+  participant smoltcp::Socket as Soc
+  participant smoltcp::Interface as I
+  participant drv::Ethernet as D
+    C-->Svr: send_packet()
+    Svr-->Soc: send()
+    Soc-->Soc: <enqueue packet in tx buffer>
+    Note over Svr,I: In main loop
+    Svr-->I: poll()
+    I-->Soc: dispatch()   
+    Soc-->Soc: <dequeue packet from tx buffer>
+    Soc-->Svr: <packet>
+    Svr-->D: transmit()
+```
+
+
+
+
