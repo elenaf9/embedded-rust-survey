@@ -8,9 +8,22 @@
 - Drone OS
 - Xous
 
+- R3-OS
+
 Not sure:
 - rxinu: "Rust implementation of Xinu educational operating system"
   - only supported target is x86, but the original Xinu OS targets embedded systems
+
+### Not part of the report
+
+Not mature enough
+- Rued
+- K5 Microkernel: very small microkernel based on L4 family of kernels
+- Dandelion: microkernel RTOS
+- MnemOS
+  - build on top of RTIC
+Too C-Like (i.e. too much unsafe code; cicumvents Rust Type system all the time):
+- Bern RTOS
 
 ## Non-embedded OSes
 
@@ -56,11 +69,15 @@ Not sure:
 
 ## Unmaintained OSes
 
-- Reenis
+- Reenix: Rust version of Weenix OS
 - RustOS
 - QuiltOS
 - bkernel
 - Stupid Operating System
 - Intermezzo
 - nebulet: "A proof-of-concept microkernel that implements a WebAssembly "usermode" that runs in Ring 0. "
-
+- Rux: microkernel featuring a capability-based system similar to seL4
+- rustboot: very small, multiplatform kernel
+- rustico: x86/ arm kernel
+- core-os-riscv: xv6-like OS (for x86 / RISCV)
+- HarSaRK-RS

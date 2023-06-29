@@ -64,4 +64,6 @@ layered structure; every layer exposed:
 - Felix: no networking stack 
 - Pluggable Interrupt OS: no networking stack
 - Poplar: no networking stack
+- Bern RTOS: no networking stack
+- mnemos OS: no networking stack
 
