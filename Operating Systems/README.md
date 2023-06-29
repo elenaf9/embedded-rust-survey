@@ -8,23 +8,44 @@
 - Drone OS
 - Xous
 
+Not sure:
+- rxinu: "Rust implementation of Xinu educational operating system"
+  - only supported target is x86, but the original Xinu OS targets embedded systems
 
 ## Non-embedded OSes
 
 
-### Unix-Like OSes, target x86
+### Unix-Like OSes, target x86 (and/ or aarch64)
 
 - Redox OS: fully featured, unix-like OS, micro-kernel, target x86
 - Theseus OS: maximal leveraging of Rust programming language
   - many tiny compoentn with clearely-defined runtime-persistent bound itneract without holding states for each other
   - use language-level machanisms, let compiler enforce invariants about OS semantics
+- Aero: monolithic
+- Kerla: monolithic
+- rCore: Rust version of THU uCore OS
+  - maybe also for embedded? supports RISCV & targets without MMU
+
+## x86 / 64bit; not unix
+
+- Poplar: "Microkernel and userspace written in Rust exploring modern ideas"
+- Pluggable Interrupt OS
+- RedLeaf
+- rust_os/ Tifflin
+    - HAL: everything feature-gate
+- Moros: requires external bootloader
+- Felix: no external dependencies
+
+### Unikernel
+
+- RustyHermit: lighweight unikernel (for high-performance / could-computing)
+  - kernel is libhermit-rs
+- ArceOS: modular OS
+- stardust-oxide: relies / builds upon XEN hypervisor
 
 ### Kernels
 
-- rust_os/ Tifflin
-    - everything feature-gate
-- Moros
-  - targets x86 with BIOS
+- zCore: Reimplementation of Zircon microkernel (used for google's Fuchsia OS)
 
 ## Rust OS on top of C kernels
 
@@ -40,23 +61,6 @@
 - QuiltOS
 - bkernel
 - Stupid Operating System
-
-## TBD
-
-- Aero
-- Kerla
-- Intermexxo
-- Felix
-- RCore
-- ArceOS
-- zCore
-- RustyHermit
-- stardust-oxide
-- axle PS
-- Pluggable Itnerrupt OS
--  RedLeaf
+- Intermezzo
 - nebulet: "A proof-of-concept microkernel that implements a WebAssembly "usermode" that runs in Ring 0. "
-- rxinu: "Rust implementation of Xinu educational operating system"
-- helenos: "A portable microkernel-based multiserver operating system written from scratch."
-- Poplar: "Microkernel and userspace written in Rust exploring modern ideas"
 

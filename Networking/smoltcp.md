@@ -38,5 +38,30 @@ layered structure; every layer exposed:
 
 - Socket implementation: Sans-IO
 
+## Users
 
+- Embassy
+- Hubris
+- Xous
+- Redox 
+- Theseus
+- Moros
+- Kerla
+- rCore
+- ArceOs
+- zCore
+- RustyHermit/ libhermit-rs
+- stardust-oxide
+- Redleaf
+
+## Non-users
+
+- Tock: do everything inhouse; not external dependencies
+- RTIC: no networking stack (since just a framework)
+- Drone: no networking stack
+- Tifflin: own implementation
+- Aero: own implementation
+- Felix: no networking stack 
+- Pluggable Interrupt OS: no networking stack
+- Poplar: no networking stack
 
