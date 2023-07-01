@@ -133,3 +133,17 @@
 - `ram`: manages allocation of RAM for applications
 - `scheduler`: manages thread scheduling and priorities
 
+
+## GitHub Docs
+
+### Memory
+
+- requires memory-mapped I/O; one section of generap-purpose RAM, MMU
+- memory devided into 4096B pages
+- process can request memory from kernel:
+  - concrete memory region (e.g. to access device)
+    - cannot be remapped until free
+  - heap memory  
+  -> when spawning thread must be request before spawn
+- 16MB reserved for kernel for per-process bookkeeping
+

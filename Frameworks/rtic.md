@@ -37,10 +37,11 @@
 -  local: onyl accessible to a specific task
   - commonly drivers or large objects
 - shared: mutex trait implemented for each shared resource
-  - critical section: closure for accessing the shared object
-  - higher prio task can preempt critical sections if it does not contend for shared object 
+  - priority-based critical section: closure for accessing the shared object
+  - higher prio task can preempt critical sections only if it does not contend for shared object 
   - default &mut, but can also specify only &
-  - `#[lock_free]` criticcal section not required if ressource only shared with same-prio task
+  - `#[lock_free]` critical section not required if ressource only shared with same-prio task
+  -> deadlock free execution guarenteed at compile time (source: talk on youtube; linked below)
 
 ## Communication over channels
 
@@ -54,4 +55,8 @@
 
 - embassy provides HAL & exectuor/ runtime, RTIC only execution framework 
 
+# RTIC talk
 
+<https://www.youtube.com/watch?v=saNdh0m_qHc&list=PLXajQV_H-DxLY7jiTKqazpksb35fuYxRe&index=8>
+
+- 

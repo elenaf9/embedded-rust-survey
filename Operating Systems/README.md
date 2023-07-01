@@ -17,7 +17,6 @@ Not sure:
 ### Not part of the report
 
 Not mature enough
-- Rued
 - K5 Microkernel: very small microkernel based on L4 family of kernels
 - Dandelion: microkernel RTOS
 - MnemOS

@@ -64,3 +64,15 @@ Problem:
 - HAL is one layer on top of PAC
 - Hardware specific
 
+## Networking
+
+embassy-net:
+- no-std, no-alloc
+- builds on smoltcp with a higher-level, more opinionated API
+  - defaults for low-level details
+  - memory management
+- to be used together with embassy HALs and network chip drivers
+
+embassy-net-driver:
+- needs to implements for new hardware so it can be used with embassy-net
+

@@ -79,6 +79,8 @@ pub enum FiberState<Y, R> {
   - corresponds to hardware interrupts
   - owns fiber chain (linked list of fibers), run in LIFO order
   - if fibers yields continue with next in chain
+  - if fiber returns remove from chain
+  - suspend when no fibers left
 - Task: logical unit of work
   - represented as async function, running in separate thread
 - Message-passing (inter-thread communication):
