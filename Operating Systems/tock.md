@@ -158,7 +158,7 @@ source: https://www.tockos.org/assets/papers/tock-sosp2017.pdf
 | Concurrency            | Cooperative | Preemptive     |
 | Update at Runtime      | No          | Yes            |
 
-Hardware Interface Layers: 
+Hardware Interface Layers:
 - Portable collection of traits; interface between the following layers:
 1. Chips-specific drivers
   - hardware specific impleemntations
@@ -178,8 +178,9 @@ Hardware Interface Layers:
 ## HAL
 
 kernel crates:
+
 - kernel/: kernel oeprations & library; Hardware Interface Layer (HIL) definitions
-- arch/ folder: Architecture crate; currently support ARM Cortex-M0, Cortex-M3, and Cortex M4, and the riscv32imac architectures; porting to another ARM Cortex M should be easy, for other architectures more work. 
+- arch/ folder: Architecture crate; currently support ARM Cortex-M0, Cortex-M3, and Cortex M4, and the riscv32imac architectures; porting to another ARM Cortex M should be easy, for other architectures more work.
   - Syscall entry/exit
   - Interrupt configuration
   - Top-half interrupt handlers
@@ -211,5 +212,30 @@ kernel crates:
 ## Networking Stack
 
 - <https://github.com/tock/tock/blob/3c29752fb9db8288eebd5eaa302692e0ee4de0b8/doc/Networking_Stack.md>
-- Networking implemented as a capsule, no usage of smoltcp   
+- Networking implemented as a capsule, no usage of smoltcp 
+- similar to Posix  
+- only udp right now
+- driver that provides userland interface
+- 
 
+### UDP driver
+
+- interface for sending, receiving, list interface addrs
+- syscalls:
+  - Allow: setup buffers to read/write from
+    0. read buffer: arg is slice into which recv buffer should be stored
+    1. write buffer: arg is to-be-transmitted udp payload
+    2. tx config buffer: src/dst addrs & ports for transmits
+    3. rx config buffer: src/dst addrs & ports for receives
+  - Subscribe: callbacks for whenf rames are transmitted/ recved
+    0. callback when frame is received
+    1. callback when frame is transmitted
+- Commands:
+  0. Existence check
+  1. get interface list
+  2. transmit payload
+    - requires valid Allow-1 & Allow-2
+    - only queues the packets, needs Subscribe-1 to check for error
+  3. Bind to address & port
+    - requires Allow-0, Allow-3 and Subscribe-0
+  4. Get Maximus payload that can be transmitted
